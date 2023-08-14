@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
 
       this.hasOne(Image, { foreignKey: "postId", as: "images" });
 
-      this.belongsTo(User, { foreignKey: "ownerId" });
+      this.belongsTo(User, { foreignKey: "ownerId", as: "owner" });
 
       this.belongsToMany(User, { through: Like, foreignKey: "postId", otherKey: "userId", onDelete: "cascade", as: "likes" });
 

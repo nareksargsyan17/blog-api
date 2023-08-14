@@ -26,13 +26,14 @@ const getPosts = async (req, res) => {
 
     const posts = await Post.findAll({
       order: [
-        ["createdAt", "ASC"]
+        ["createdAt", "DESC"]
       ],
       limit: 10,
       offset: (page - 1) * 10,
       include: [
         {
           model: User,
+          as: "owner",
           attributes: ["firstName", "lastName"],
           include: [
             {
@@ -53,6 +54,11 @@ const getPosts = async (req, res) => {
         {
           model: User,
           as : "likes",
+          attributes: ["firstName", "lastName"],
+        },
+        {
+          model: User,
+          as : "comments",
           attributes: ["firstName", "lastName"],
         }
       ]

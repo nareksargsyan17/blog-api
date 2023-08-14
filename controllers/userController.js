@@ -85,8 +85,23 @@ const changePassword = async (req, res) => {
   }
 }
 
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+
+    return res.status(200).send({
+      data: user
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something is wrong!"
+    })
+  }
+};
+
 module.exports =  {
   registration,
   login,
-  changePassword
+  changePassword,
+  getUser
 }
